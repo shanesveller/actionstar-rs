@@ -9,6 +9,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Setup toolchain
+      run: |
+        version=$(cat rust-toolchain)
+        rustup default $version
+        rustup update $version
+        rustup component add clippy
+        rustup component add rustfmt
     - name: Check formatting
       run: cargo fmt --verbose -- --check
     - name: Build
