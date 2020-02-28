@@ -3,7 +3,7 @@
 with pkgs;
 
 mkShell {
-  buildInputs = [ direnv lorri ]
+  buildInputs = [ direnv lorri skopeo ]
     ++ (with pkgs.rustChannelOf { rustToolchain = ./rust-toolchain; };
       [ rust ]);
 }
