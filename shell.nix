@@ -2,8 +2,4 @@
 
 with pkgs;
 
-mkShell {
-  buildInputs = [
-
-  ];
-}
+mkShell { buildInputs = [ lorri ]; }
