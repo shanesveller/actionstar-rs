@@ -2,4 +2,4 @@
 
 with pkgs;
 
-mkShell { buildInputs = [ lorri ]; }
+mkShell { buildInputs = [ direnv lorri ]; }
