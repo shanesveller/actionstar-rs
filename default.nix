@@ -1,18 +1,14 @@
-{ system ? builtins.currentSystem, crossSystem ? null, pkgs ? import ./nix {
-  inherit system;
-  crossSystem.config = crossSystem;
-} }:
+{ system ? builtins.currentSystem, pkgs ? import ./nix { inherit system; } }:
 
 let
-  cargo_nix = pkgs.callPackage ./Cargo.nix { };
+  # https://www.reddit.com/r/NixOS/comments/f0yi3b/how_to_build_a_simple_static_rust_binary_using/fh2asml/
+  rust = (pkgs.rustChannelOf { channel = "stable"; }).rust.override {
+    # extensions = [ "rust-src" ];
+    targets = [ "x86_64-unknown-linux-musl" ];
+  };
+  buildRustCrate = pkgs.buildRustCrate.override { rustc = rust; };
+  cargo_nix = pkgs.callPackage ./Cargo.nix { inherit buildRustCrate pkgs; };
   actionstar = cargo_nix.rootCrate.build;
-  # linuxPackages = import (import ./nix/sources.nix {}).nixpkgs { crossSystem =  }
-  rustLinux = pkgs.rustChannelOfTargets pkgs.latest.rustChannels.stable null
-    [ "x86_64-unknown-linux-gnu" ];
-  # linuxBuildCrate = pkgs.buildRustCrate.override { inherit (rustLinux) rustc; };
-  # actionstarLinux = (pkgs.callPackage ./Cargo.nix {
-  #   buildRustCrate = linuxBuildCrate;
-  # }).rootCrate.build;
   dockerimage = pkgs.dockerTools.buildLayeredImage {
     name = "actionstar";
     tag = "latest";
