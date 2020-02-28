@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "kolloch",
         "repo": "crate2nix",
-        "rev": "7bf4af7ac66b15ac12f5e8a73371917f7d6531f6",
-        "sha256": "0mw8p5ni2ajri2zj69wv3rfpf7pjnmq6id6bzc1ibpa0ry4x64sg",
+        "rev": "832054d3d80d4c82e9ba0ef4487eafd916074c9b",
+        "sha256": "15yibdsf2hb89dhys0sl9m6545q006w3faw6d8hws0cw1xpsr6zk",
         "type": "tarball",
-        "url": "https://github.com/kolloch/crate2nix/archive/7bf4af7ac66b15ac12f5e8a73371917f7d6531f6.tar.gz",
+        "url": "https://github.com/kolloch/crate2nix/archive/832054d3d80d4c82e9ba0ef4487eafd916074c9b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
         "version": "0.7.1"
     },
