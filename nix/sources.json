@@ -1,14 +1,14 @@
 {
     "lorri": {
-        "branch": "master",
+        "branch": "rolling-release",
         "description": "Your project's nix-env",
         "homepage": "",
         "owner": "target",
         "repo": "lorri",
-        "rev": "b2f1fe218ab95ce7c89c4b35644d01c4c1f1b21d",
-        "sha256": "0yliffg3kpmdi2nk1xjhizsnz03djnjj8pw5k3gryz7hh2cyvyx7",
+        "rev": "73665b9644ea96427ae6f881a52cf8b10d129f5d",
+        "sha256": "13h8h2f5r9ly9ihnyxgnh1jd77p2w9qiikw7xdl6dkzc71v1dnl8",
         "type": "tarball",
-        "url": "https://github.com/target/lorri/archive/b2f1fe218ab95ce7c89c4b35644d01c4c1f1b21d.tar.gz",
+        "url": "https://github.com/target/lorri/archive/73665b9644ea96427ae6f881a52cf8b10d129f5d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
