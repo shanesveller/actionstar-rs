@@ -1,0 +1,15 @@
+# https://github.com/cachix/install-nix-action/tree/9affe1ce8125d09840370f49463c29a053f04867#usage
+
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: cachix/install-nix-action@v6
+    - run: nix-build
