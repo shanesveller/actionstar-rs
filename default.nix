@@ -1,4 +1,7 @@
-{ system ? builtins.currentSystem, pkgs ? import ./nix { inherit system; } }:
+{ crossSystem ? null, system ? builtins.currentSystem, pkgs ? import ./nix {
+  inherit system;
+  crossSystem = { config = crossSystem; };
+} }:
 
 let
   # https://www.reddit.com/r/NixOS/comments/f0yi3b/how_to_build_a_simple_static_rust_binary_using/fh2asml/
@@ -13,7 +16,7 @@ let
     name = "actionstar";
     tag = "latest";
     # created = "now";
-    contents = [ actionstar ];
+    contents = [ ];
     config = { Cmd = "${actionstar}/bin/actionstar"; };
   };
 
