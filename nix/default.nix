@@ -1,4 +1,4 @@
-{ sources ? import ./sources.nix }:
+{ sources ? import ./sources.nix, config ? { } }:
 with {
   moz_overlay = import sources.nixpkgs-mozilla;
   overlay = _: pkgs: {
@@ -9,5 +9,5 @@ with {
 };
 import sources.nixpkgs {
   overlays = [ overlay moz_overlay ];
-  config = { };
+  inherit config;
 }
