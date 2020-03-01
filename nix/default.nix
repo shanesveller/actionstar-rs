@@ -3,7 +3,7 @@
 with {
   moz_overlay = import sources.nixpkgs-mozilla;
   overlay = _: pkgs: {
-    crate2nix = import sources.crate2nix { };
+    crate2nix = import sources.crate2nix { inherit pkgs; };
     lorri = import sources.lorri { inherit pkgs; };
     niv = import sources.niv { };
   };
