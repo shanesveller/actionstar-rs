@@ -6,7 +6,7 @@ with {
     crate2nix = import sources.crate2nix { inherit pkgs; };
     lorri = import sources.lorri { inherit pkgs; };
     niv = import sources.niv { };
-    inherit (import sources.unstable { }) skopeo;
+    inherit (import sources.unstable { inherit system; }) skopeo;
   };
 };
 import sources.nixpkgs {
