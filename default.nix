@@ -13,7 +13,6 @@ let
   dockerimage = pkgs.dockerTools.buildLayeredImage {
     name = "actionstar";
     tag = "latest";
-    # created = "now";
     contents = [ ];
     config = { Cmd = "${actionstar}/bin/actionstar"; };
   };
