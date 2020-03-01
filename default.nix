@@ -1,16 +1,17 @@
 { system ? builtins.currentSystem, pkgs ? import ./nix { inherit system; } }:
 
 let
+  linuxPkgs = import ./nix { system = "x86_64-linux"; };
   # https://www.reddit.com/r/NixOS/comments/f0yi3b/how_to_build_a_simple_static_rust_binary_using/fh2asml/
-  rust =
-    (pkgs.rustChannelOfTargets "stable" null [ "x86_64-unknown-linux-musl" ]);
-  linuxBuildRustCrate = pkgs.buildRustCrate.override { rustc = rust; };
-  cargo_nix = pkgs.callPackage ./Cargo.nix {
-    inherit pkgs;
+  rust = (linuxPkgs.rustChannelOfTargets "stable" null
+    [ "x86_64-unknown-linux-musl" ]);
+  linuxBuildRustCrate = linuxPkgs.buildRustCrate.override { rustc = rust; };
+  cargo_nix = linuxPkgs.callPackage ./Cargo.nix {
     buildRustCrate = linuxBuildRustCrate;
+    pkgs = linuxPkgs;
   };
   actionstar = cargo_nix.rootCrate.build;
-  dockerimage = pkgs.dockerTools.buildLayeredImage {
+  dockerimage = linuxPkgs.dockerTools.buildLayeredImage {
     name = "actionstar";
     tag = "latest";
     contents = [ ];
