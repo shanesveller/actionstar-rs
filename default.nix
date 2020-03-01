@@ -17,4 +17,13 @@ let
     config = { Cmd = "${actionstar}/bin/actionstar"; };
   };
 
-in { inherit actionstar dockerimage; }
+  unpackedImage = pkgs.runCommand "unpacked-image" { } ''
+    ${pkgs.skopeo}/bin/skopeo --insecure-policy --override-os linux copy docker-archive:${dockerimage} dir:$out
+  '';
+
+  allImages = pkgs.linkFarm "images" [{
+    name = "actionstar";
+    path = unpackedImage;
+  }];
+
+in { inherit actionstar dockerimage unpackedImage allImages; }
