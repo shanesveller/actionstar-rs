@@ -22,6 +22,7 @@ dependencies = [
  "k8s-openapi",
  "k8s-openapi-derive",
  "kube",
+ "lazy_static",
  "log 0.4.8",
  "pretty_env_logger",
  "prometheus",
