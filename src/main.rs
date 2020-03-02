@@ -3,19 +3,27 @@
 
 #[macro_use]
 extern crate log;
+
+use futures::StreamExt;
 use kube::{
     api::{v1Event, Api, WatchEvent},
     client::APIClient,
     config,
     runtime::Informer,
 };
-
-use futures::StreamExt;
+use prometheus::{Counter, Encoder, Opts, Registry, TextEncoder};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     std::env::set_var("RUST_LOG", "info,kube=trace");
     pretty_env_logger::init();
+
+    let counter_opts = Opts::new("test_counter", "test counter help");
+    let counter = Counter::with_opts(counter_opts).unwrap();
+    // Create a Registry and register Counter.
+    let r = Registry::new();
+    r.register(Box::new(counter.clone())).unwrap();
+
     let config = config::load_kube_config().await?;
     let client = APIClient::new(config);
 
@@ -26,8 +34,16 @@ async fn main() -> anyhow::Result<()> {
         let mut events = ei.poll().await?.boxed();
 
         while let Some(event) = events.next().await {
+            counter.inc();
+
             let event = event?;
             handle_events(event)?;
+
+            let mut buffer = vec![];
+            let encoder = TextEncoder::new();
+            let metric_families = r.gather();
+            encoder.encode(&metric_families, &mut buffer).unwrap();
+            println!("{}", String::from_utf8(buffer).unwrap());
         }
     }
 }
