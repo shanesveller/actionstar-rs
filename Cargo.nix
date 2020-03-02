@@ -116,7 +116,6 @@ rec {
           {
             name = "k8s-openapi";
             packageId = "k8s-openapi 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)";
-            usesDefaultFeatures = false;
             features = [ "v1_15" ];
           }
           {
@@ -1605,7 +1604,7 @@ rec {
         features = {
           "default" = [ "api" ];
         };
-        resolvedDefaultFeatures = [ "v1_15" ];
+        resolvedDefaultFeatures = [ "api" "default" "v1_15" ];
       };
       "kernel32-sys 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = rec {
         crateName = "kernel32-sys";
