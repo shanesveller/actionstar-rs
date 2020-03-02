@@ -16,6 +16,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "futures",
+ "futures-timer",
  "k8s-openapi",
  "k8s-openapi-derive",
  "kube",
