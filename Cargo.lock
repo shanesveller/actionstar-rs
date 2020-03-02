@@ -23,6 +23,9 @@ dependencies = [
  "log",
  "pretty_env_logger",
  "prometheus",
+ "serde",
+ "serde_derive",
+ "serde_json",
  "tokio",
 ]
 
@@ -638,6 +641,7 @@ dependencies = [
  "futures-timer",
  "futures-util",
  "http",
+ "k8s-openapi",
  "log",
  "openssl",
  "paste",
