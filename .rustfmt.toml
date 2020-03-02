@@ -1,1 +1,4 @@
 edition = "2018"
+
+merge_derives = true
+# merge_imports = true
