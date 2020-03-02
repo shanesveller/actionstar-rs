@@ -15,6 +15,7 @@ name = "actionstar"
 version = "0.1.0"
 dependencies = [
  "k8s-openapi",
+ "k8s-openapi-derive",
  "kube",
  "log",
  "pretty_env_logger",
@@ -576,6 +577,29 @@ dependencies = [
  "serde-value",
  "serde_json",
  "url",
+]
+
+[[package]]
+name = "k8s-openapi-codegen-common"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e605504305fafdf00cbdf0a41bc748ba682dc3d3eb13a46362da736e8d7c84e"
+dependencies = [
+ "http",
+ "log",
+]
+
+[[package]]
+name = "k8s-openapi-derive"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7ac34ceaf777a9dcbdb2240d799053e63a9ca63b56e20420c94e5aae88192fa8"
+dependencies = [
+ "http",
+ "k8s-openapi-codegen-common",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
